@@ -48,4 +48,5 @@ def index():
     numero=str(int(preds[0]))     # transforma para string
     return  numero                # retorna o número para o cliente
 
+#para levantar seu servidor FLASK, digite: python3 -m flask run   na linha de comando.
 
