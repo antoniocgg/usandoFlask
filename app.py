@@ -35,15 +35,17 @@ def index():
         file = request.files['file']
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename)) # salva a imagem no cache do Flask. 
     picture=Image.open('C:/caminho/para/o/arquivo_temporario_com _a_imagem_a_ser_inferida/hello_flask/tmp/test.png')
     picture=picture.convert('L') # trata  a imagem
     picture=picture.resize((28,28), Image.LANCZOS) 
-    picture = 255-np.array(pictire)  
-    data=np.int64(pictire)
+    picture = 255-np.array(picture)  # transforma  a imagem em uma matriz (elimina os cabeçalhos, etc, etc)
+    data=np.int64(picture)
     data= data.reshape(1,-1)  #coloca no formato do modelo
     data=data/255.0           # normaliza (foi feito para trainar o modelo)
     preds= model.predict(data)    # FAZ A INFERÊNCIA
     print(preds[0])               #exibe na linha de comando somente para verificar. Pode suprimir, se quiser
     numero=str(int(preds[0]))     # transforma para string
     return  numero                # retorna o número para o cliente
+
+
